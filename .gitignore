@@ -1,0 +1,13 @@
+# Ignore dataset files
+data/
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
