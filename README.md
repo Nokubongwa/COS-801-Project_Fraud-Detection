@@ -1,37 +1,178 @@
-# COS-801-Project_Fraud-Detection-under-Extreme-Class-Imbalance
- Deep Learning on Tabular Data for Fraud Detection under Extreme Class Imbalance
-Domain: Tabular data and financial technology. Suggested level: introductory to intermediate.
+# COS 801 Project: Deep Learning on Tabular Data for Fraud Detection Under Extreme Class Imbalance
 
-# Background
+## Background
 
-Fraud detection combines two conditions that break naive deep learning practice: fewer than one positive
-case in every thousand transactions, and a data-generating process that shifts as fraudsters adapt. Gradient
-boosted trees remain a very strong baseline on tabular data, so any claim that a neural architecture is
-preferable needs careful support. This project tests that claim honestly and studies the cost-sensitive
-threshold decision.
+Fraud detection presents two major challenges that make it difficult for traditional deep learning approaches:
 
-# Research questions
-RQ10.1 Under what conditions, if any, do tabular neural architectures such as TabNet, FT-Transformer and
-SAINT outperform tuned gradient boosted trees on fraud detection?
-RQ10.2 How do resampling, focal loss and cost-sensitive learning compare as strategies for extreme class
-imbalance, and how does each affect calibration?
-RQ10.3 How quickly does model performance decay when evaluated on transactions from a later time period
-than the training window?
+1. Extreme class imbalance, where fraudulent transactions may account for fewer than one positive case per thousand transactions.
+2. Concept drift, where fraud patterns change over time as fraudsters adapt their behavior.
 
-# Datasets
-• IEEE-CIS Fraud Detection on Kaggle, roughly 590,000 transactions with rich categorical and temporal
-features.
-• Credit Card Fraud Detection on Kaggle (mlg-ulb/creditcardfraud), 284,807 transactions with 0.17 percent
-positives.
-• The PaySim synthetic mobile money dataset on Kaggle, which is useful for mobile money scenarios
-relevant to African markets.
+Gradient Boosted Trees (GBTs) remain a strong benchmark for tabular data. Therefore, any claim that deep learning architectures outperform GBTs must be supported through careful experimental evaluation.
 
-# Suggested methods and baselines
-Establish a tuned LightGBM or XGBoost baseline first. Then evaluate FT-Transformer, TabNet and a simple
-embedding-based multilayer perceptron. Use temporal splits rather than random splits so that leakage
-through time is impossible.
+This project investigates whether modern deep learning architectures for tabular data can outperform traditional machine learning methods in fraud detection while accounting for extreme class imbalance and temporal changes in fraud patterns.
 
-# Evaluation plan
-Area under the precision-recall curve, precision at a fixed alert budget, expected monetary cost under an
-explicit cost matrix, calibration assessment, and a performance-over-time plot showing decay.
-Skills developed: Tabular modelling, imbalanced learning, cost-sensitive evaluation, temporal validation. 
+---
+
+## Research Questions
+
+### RQ10.1
+Under what conditions, if any, do tabular neural architectures such as **TabNet**, **FT-Transformer**, and **SAINT** outperform tuned Gradient Boosted Trees on fraud detection tasks?
+
+### RQ10.2
+How do **resampling**, **focal loss**, and **cost-sensitive learning** compare as strategies for handling extreme class imbalance, and how does each method affect model calibration?
+
+### RQ10.3
+How quickly does model performance degrade when evaluated on transaction data collected after the training period?
+
+---
+
+## Datasets
+
+This project will investigate the following dataset:
+
+### IEEE-CIS Fraud Detection
+- Source: Kaggle
+- Approximately 590,000 transactions
+- Rich categorical, transactional, and temporal features
+- Primary dataset for this project
+
+Dataset URL:
+
+https://www.kaggle.com/competitions/ieee-fraud-detection
+
+---
+
+## Suggested Methods and Baselines
+
+The project follows a baseline-first approach.
+
+### Traditional Machine Learning Baselines
+- LightGBM
+- XGBoost
+
+### Deep Learning Models
+- FT-Transformer
+- TabNet
+- Embedding-based Multi-Layer Perceptron (MLP)
+- SAINT
+
+### Data Splitting Strategy
+
+Temporal splits will be used instead of random train-test splits to prevent data leakage and simulate real-world fraud detection scenarios.
+
+---
+
+## Evaluation Plan
+
+Models will be evaluated using:
+
+- Precision-Recall AUC (PR-AUC)
+- Precision at a fixed alert budget
+- Expected monetary cost using a cost matrix
+- Calibration analysis
+- Performance-over-time decay plots
+
+---
+
+## Skills Developed
+
+- Tabular Data Modelling
+- Imbalanced Learning
+- Cost-Sensitive Evaluation
+- Temporal Validation
+- Model Calibration
+- Fraud Analytics
+
+---
+
+## Project Structure
+
+```text
+COS-801-Project_Fraud-Detection/
+│
+├── data/
+│   ├── raw/
+│   └── transformed/
+│
+├── notebooks/
+│
+├── src/
+│
+├── models/
+│
+├── outputs/
+│
+├── reports/
+│
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
+
+---
+
+## Dataset Setup
+
+The datasets are not stored in this repository because they exceed GitHub's file size limits.
+
+### Download IEEE-CIS Fraud Detection
+
+Authenticate with Kaggle:
+
+```bash
+py -m kaggle auth login
+```
+
+Download the dataset:
+
+```bash
+py -m kaggle competitions download -c ieee-fraud-detection
+```
+
+Extract the downloaded archive and place the files in:
+
+```text
+data/raw/
+```
+
+Expected files:
+
+```text
+data/raw/
+├── train_transaction.csv
+├── train_identity.csv
+├── test_transaction.csv
+├── test_identity.csv
+└── sample_submission.csv
+```
+
+---
+
+## Running the Project
+
+Run exploratory analysis:
+
+```bash
+python src/eda.py
+```
+
+Run model training:
+
+```bash
+python src/train.py
+```
+
+---
+
+## Current Project Status
+
+- [x] Project selected
+- [x] Kaggle access configured
+- [x] IEEE-CIS dataset downloaded
+- [ ] Data exploration
+- [ ] Data preprocessing pipeline
+- [ ] LightGBM baseline
+- [ ] Deep learning models
+- [ ] Calibration analysis
+- [ ] Temporal drift evaluation
+- [ ] Final report
